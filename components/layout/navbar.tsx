@@ -8,8 +8,7 @@ import { useState, useEffect } from "react"
 import { cn } from "@/lib/utils"
 
 const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/articles", label: "Articles" },
+  { href: "/", label: "Home" }
 ]
 
 export function Navbar() {
@@ -17,14 +16,18 @@ export function Navbar() {
   const { theme, setTheme } = useTheme()
   const [mobileOpen, setMobileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [prevPathname, setPrevPathname] = useState(pathname)
+
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname)
+    setMobileOpen(false)
+  }
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 8)
     window.addEventListener("scroll", handler)
     return () => window.removeEventListener("scroll", handler)
   }, [])
-
-  useEffect(() => setMobileOpen(false), [pathname])
 
   return (
     <header
@@ -74,7 +77,7 @@ export function Navbar() {
           </button>
 
           <Link
-            href="/articles"
+            href="/login"
             className="hidden md:inline-flex items-center h-8 px-4 text-sm font-medium rounded-md bg-foreground text-background hover:opacity-90 transition-opacity"
           >
             Get Started
@@ -109,7 +112,7 @@ export function Navbar() {
               </Link>
             ))}
             <Link
-              href="/articles"
+              href="/login"
               className="mt-2 flex items-center justify-center h-9 text-sm font-medium rounded-md bg-foreground text-background"
             >
               Get Started

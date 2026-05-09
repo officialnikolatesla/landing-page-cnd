@@ -1,21 +1,22 @@
 import { Zap, Shield, BarChart2 } from "lucide-react"
+import Image from "next/image"
 
 const features = [
   {
-    icon: Zap,
     title: "Lightning Fast",
+    imagePath: "https://placehold.co/600x400png",
     description:
       "Built on Next.js with server-side rendering and edge caching for sub-second page loads across the globe.",
   },
   {
-    icon: Shield,
     title: "SEO Optimized",
+    imagePath: "https://placehold.co/600x400png",
     description:
       "Every page ships with structured metadata, Open Graph tags, and XML sitemaps out of the box.",
   },
   {
-    icon: BarChart2,
     title: "Content-Driven",
+    imagePath: "https://placehold.co/600x400png",
     description:
       "Powered by a headless API, your content is structured, scored, and ready to rank on search engines.",
   },
@@ -31,26 +32,23 @@ export function FeaturesSection() {
             Features
           </p>
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground tracking-tight">
-            Everything you need to ship fast.
+            Secure and Fast Login
           </h2>
         </div>
 
         {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {features.map((feat) => {
-            const Icon = feat.icon
+          {features.map((feature) => {
             return (
               <div
-                key={feat.title}
-                className="p-6 rounded-xl border border-border bg-card flex flex-col gap-4"
+                key={feature.title}
+                className="rounded-xl border border-border bg-card flex flex-col overflow-hidden"
               >
-                <div className="w-10 h-10 rounded-lg bg-muted flex items-center justify-center">
-                  <Icon className="h-5 w-5 text-foreground" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-foreground mb-1">{feat.title}</h3>
+                <Image unoptimized src={feature.imagePath} alt={feature.title} width={600} height={400} />
+                <div className="p-4">
+                  <h3 className="font-semibold text-foreground mb-1">{feature.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    {feat.description}
+                    {feature.description}
                   </p>
                 </div>
               </div>

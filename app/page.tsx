@@ -1,11 +1,9 @@
-import type { Metadata } from "next"
-import { Navbar } from "@/components/layout/navbar"
-import { Footer } from "@/components/layout/footer"
-import { HeroSection } from "@/components/home/hero-section"
 import { FeaturesSection } from "@/components/home/features-section"
-import { HowItWorksSection } from "@/components/home/how-it-works-section"
-import { CtaBannerSection } from "@/components/home/cta-banner-section"
+import { HeroSection } from "@/components/home/hero-section"
+import { Navbar } from "@/components/layout/navbar"
+import type { Metadata } from "next"
 
+/* Metadata untuk SEO */
 export const metadata: Metadata = {
   title: "Brand — Your Modern Content Platform",
   description:
@@ -25,10 +23,7 @@ export default function HomePage() {
       <main>
         <HeroSection />
         <FeaturesSection />
-        <HowItWorksSection />
-        <CtaBannerSection />
       </main>
-      <Footer />
     </>
   )
 }
