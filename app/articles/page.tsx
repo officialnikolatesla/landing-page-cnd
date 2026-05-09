@@ -162,7 +162,6 @@ export default async function ArticlesPage({ searchParams }: Props) {
           )}
         </div>
       </main>
-      <Footer />
     </>
   )
 }

@@ -143,7 +143,6 @@ export default async function ArticleDetailPage({ params }: Props) {
           </div>
         )}
       </main>
-      <Footer />
     </>
   )
 }
