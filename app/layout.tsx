@@ -13,13 +13,13 @@ const fontMono = Geist_Mono({
   variable: "--font-mono",
 })
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
+
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://yourdomain.com"
-  ),
+  metadataBase: new URL(siteUrl),
   title: {
-    default: "Brand",
-    template: "%s | Brand",
+    default: "Bola Balap",
+    template: "%s | Bola Balap",
   },
   description: "A modern, minimal platform for sharing ideas and insights.",
   robots: { index: true, follow: true },

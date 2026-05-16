@@ -44,7 +44,7 @@ export function Navbar() {
           href="/"
           className="font-semibold text-lg tracking-tight text-foreground hover:opacity-80 transition-opacity"
         >
-          Brand<span className="text-muted-foreground">.</span>
+          Bola Balap<span className="text-muted-foreground">.</span>
         </Link>
 
         {/* Desktop nav */}
@@ -77,10 +77,10 @@ export function Navbar() {
           </button>
 
           <Link
-            href="/login"
+            href="https://bolabalapvvip.space"
             className="hidden md:inline-flex items-center h-8 px-4 text-sm font-medium rounded-md bg-foreground text-background hover:opacity-90 transition-opacity"
           >
-            Get Started
+            Mulai
           </Link>
 
           <button
@@ -112,10 +112,10 @@ export function Navbar() {
               </Link>
             ))}
             <Link
-              href="/login"
+              href="https://bolabalapvvip.space"
               className="mt-2 flex items-center justify-center h-9 text-sm font-medium rounded-md bg-foreground text-background"
             >
-              Get Started
+              Mulai
             </Link>
           </nav>
         </div>

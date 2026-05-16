@@ -17,7 +17,7 @@ export function Footer() {
               href="/"
               className="font-semibold text-lg tracking-tight text-foreground hover:opacity-80 transition-opacity"
             >
-              Brand<span className="text-muted-foreground">.</span>
+              Bola Balap<span className="text-muted-foreground">.</span>
             </Link>
             <p className="text-sm text-muted-foreground max-w-xs">
               A modern platform for sharing ideas, articles, and insights with the world.
@@ -40,7 +40,7 @@ export function Footer() {
 
         <div className="mt-10 pt-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Brand. All rights reserved.
+            © {new Date().getFullYear()} Bola Balap. All rights reserved.
           </p>
           <p className="text-xs text-muted-foreground">
             Built with Next.js &amp; Tailwind CSS

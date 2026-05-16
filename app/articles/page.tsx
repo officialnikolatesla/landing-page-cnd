@@ -8,10 +8,10 @@ import { getArticles } from "@/lib/api"
 import { BackToTop } from "@/components/back-to-top"
 
 export const metadata: Metadata = {
-  title: "Articles | Brand",
+  title: "Articles | Bola Balap",
   description: "Browse the latest articles, guides, and insights.",
   openGraph: {
-    title: "Articles | Brand",
+    title: "Articles | Bola Balap",
     description: "Browse the latest articles, guides, and insights.",
     type: "website",
   },

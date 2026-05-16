@@ -5,11 +5,11 @@ import type { Metadata } from "next"
 
 /* Metadata untuk SEO */
 export const metadata: Metadata = {
-  title: "Brand — Your Modern Content Platform",
+  title: "Bola Balap — Your Modern Content Platform",
   description:
     "A modern, minimal platform for sharing ideas, articles, and insights with the world. Built with performance and SEO in mind.",
   openGraph: {
-    title: "Brand — Your Modern Content Platform",
+    title: "Bola Balap — Your Modern Content Platform",
     description:
       "A modern, minimal platform for sharing ideas, articles, and insights with the world.",
     type: "website",
