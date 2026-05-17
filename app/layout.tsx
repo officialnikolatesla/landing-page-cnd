@@ -5,6 +5,11 @@ import Script from "next/script"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
+import {
+  getLandingPageMetadata,
+  getRootLayoutMetadata,
+  siteLanguageFromMetadata,
+} from "@/lib/seo-metadata"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
 
@@ -13,26 +18,21 @@ const fontMono = Geist_Mono({
   variable: "--font-mono",
 })
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
-
-export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
-  title: {
-    default: "Bola Balap",
-    template: "%s | Bola Balap",
-  },
-  description: "A modern, minimal platform for sharing ideas and insights.",
-  robots: { index: true, follow: true },
+export async function generateMetadata(): Promise<Metadata> {
+  return getRootLayoutMetadata()
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const landing = await getLandingPageMetadata()
+  const lang = siteLanguageFromMetadata(landing)
+
   return (
     <html
-      lang="en"
+      lang={lang}
       suppressHydrationWarning
       className={cn("antialiased", fontMono.variable, "font-sans", inter.variable)}
     >

@@ -1,24 +1,21 @@
+import type { Metadata } from "next"
+
 import { FeaturesSection } from "@/components/home/features-section"
 import { HeroSection } from "@/components/home/hero-section"
 import { Navbar } from "@/components/layout/navbar"
-import type { Metadata } from "next"
+import { JsonLd } from "@/components/seo/json-ld"
+import { getHomePageMetadata, getLandingPageMetadata } from "@/lib/seo-metadata"
 
-/* Metadata untuk SEO */
-export const metadata: Metadata = {
-  title: "Bola Balap — Your Modern Content Platform",
-  description:
-    "A modern, minimal platform for sharing ideas, articles, and insights with the world. Built with performance and SEO in mind.",
-  openGraph: {
-    title: "Bola Balap — Your Modern Content Platform",
-    description:
-      "A modern, minimal platform for sharing ideas, articles, and insights with the world.",
-    type: "website",
-  },
+export async function generateMetadata(): Promise<Metadata> {
+  return getHomePageMetadata()
 }
 
-export default function HomePage() {
+export default async function HomePage() {
+  const landingMeta = await getLandingPageMetadata()
+
   return (
     <>
+      {landingMeta?.schema_jsonld ? <JsonLd data={landingMeta.schema_jsonld} /> : null}
       <Navbar />
       <main>
         <HeroSection />
