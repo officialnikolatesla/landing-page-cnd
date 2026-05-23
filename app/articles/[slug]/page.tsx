@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { ChevronLeft, Clock, Calendar, BookOpen } from "lucide-react"
-import { Navbar } from "@/components/layout/navbar"
+import { NavbarShell } from "@/components/layout/navbar-shell"
 import { Footer } from "@/components/layout/footer"
 import { ArticleCard } from "@/components/article-card"
 import { ReadingProgress } from "@/components/reading-progress"
@@ -59,7 +59,7 @@ export default async function ArticleDetailPage({ params }: Props) {
     <>
       <ReadingProgress />
       <BackToTop />
-      <Navbar />
+      <NavbarShell />
       <main className="min-h-screen pt-16">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 py-12">
           {/* Breadcrumb */}

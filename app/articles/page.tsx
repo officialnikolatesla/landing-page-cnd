@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { ChevronLeft, ChevronRight } from "lucide-react"
-import { Navbar } from "@/components/layout/navbar"
+import { NavbarShell } from "@/components/layout/navbar-shell"
 import { Footer } from "@/components/layout/footer"
 import { ArticleCard } from "@/components/article-card"
 import { getArticles } from "@/lib/api"
@@ -39,7 +39,7 @@ export default async function ArticlesPage({ searchParams }: Props) {
   return (
     <>
       <BackToTop />
-      <Navbar />
+      <NavbarShell />
       <main className="min-h-screen pt-16">
         {/* Page header */}
         <div className="border-b border-border">

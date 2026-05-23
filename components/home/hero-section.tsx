@@ -2,7 +2,11 @@ import Link from "next/link"
 import Image from "next/image"
 import { ArrowRight, Sparkles } from "lucide-react"
 
-export function HeroSection() {
+type HeroSectionProps = {
+  redirectUrl: string
+}
+
+export function HeroSection({ redirectUrl }: HeroSectionProps) {
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden pt-16">
       <Image
@@ -32,13 +36,17 @@ export function HeroSection() {
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-          <Link
-            href="https://bolabalapvvip.space"
-            className="inline-flex items-center gap-2 h-11 px-6 rounded-md bg-foreground text-background text-sm font-medium hover:opacity-90 transition-opacity"
-          >
-            Masuk Sekarang
-            <ArrowRight className="h-4 w-4" />
-          </Link>
+          {redirectUrl ? (
+            <Link
+              href={redirectUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 h-11 px-6 rounded-md bg-foreground text-background text-sm font-medium hover:opacity-90 transition-opacity"
+            >
+              Masuk Sekarang
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          ) : null}
         </div>
       </div>
     </section>

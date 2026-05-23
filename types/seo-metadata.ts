@@ -19,6 +19,7 @@ export type LandingPageMetadata = {
 
 export type LandingPageMetadataResponse = {
   metadata: LandingPageMetadata
+  redirectUrl: string
   fromCache: boolean
   generatedAt: string | null
   sourceHash: string

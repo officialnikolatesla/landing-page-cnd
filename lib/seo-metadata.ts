@@ -58,21 +58,38 @@ export const defaultHomeMetadata: Metadata = {
   },
 }
 
-async function fetchLandingPageMetadata(): Promise<LandingPageMetadata | null> {
+async function fetchLandingPageContext(): Promise<{
+  metadata: LandingPageMetadata | null
+  redirectUrl: string
+}> {
   try {
     const res = await fetch(`${apiBase()}/metadata`, {
       next: { revalidate: REVALIDATE_SEC },
       headers: { Accept: "application/json" },
     })
-    if (!res.ok) return null
+    if (!res.ok) return { metadata: null, redirectUrl: "" }
     const body = (await res.json()) as LandingPageMetadataResponse
-    return body.metadata ?? null
+    const metadata = body.metadata ?? null
+    const redirectUrl = body.redirectUrl?.trim() || metadata?.canonical_url?.trim() || ""
+    return { metadata, redirectUrl }
   } catch {
-    return null
+    return { metadata: null, redirectUrl: "" }
   }
 }
 
+export const getLandingPageContext = cache(fetchLandingPageContext)
+
+async function fetchLandingPageMetadata(): Promise<LandingPageMetadata | null> {
+  const { metadata } = await getLandingPageContext()
+  return metadata
+}
+
 export const getLandingPageMetadata = cache(fetchLandingPageMetadata)
+
+export async function getRedirectUrl(): Promise<string> {
+  const { redirectUrl } = await getLandingPageContext()
+  return redirectUrl
+}
 
 export async function getHomePageMetadata(): Promise<Metadata> {
   const landing = await getLandingPageMetadata()

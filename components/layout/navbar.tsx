@@ -7,11 +7,15 @@ import { Moon, Sun, Menu, X } from "lucide-react"
 import { useState, useEffect } from "react"
 import { cn } from "@/lib/utils"
 
+type NavbarProps = {
+  redirectUrl: string
+}
+
 const navLinks = [
   { href: "/", label: "Home" }
 ]
 
-export function Navbar() {
+export function Navbar({ redirectUrl }: NavbarProps) {
   const pathname = usePathname()
   const { theme, setTheme } = useTheme()
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -76,12 +80,16 @@ export function Navbar() {
             <Moon className="h-4 w-4 dark:hidden" />
           </button>
 
-          <Link
-            href="https://bolabalapvvip.space"
-            className="hidden md:inline-flex items-center h-8 px-4 text-sm font-medium rounded-md bg-foreground text-background hover:opacity-90 transition-opacity"
-          >
-            Mulai
-          </Link>
+          {redirectUrl ? (
+            <Link
+              href={redirectUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden md:inline-flex items-center h-8 px-4 text-sm font-medium rounded-md bg-foreground text-background hover:opacity-90 transition-opacity"
+            >
+              Mulai
+            </Link>
+          ) : null}
 
           <button
             onClick={() => setMobileOpen((o) => !o)}
@@ -111,12 +119,16 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <Link
-              href="https://bolabalapvvip.space"
-              className="mt-2 flex items-center justify-center h-9 text-sm font-medium rounded-md bg-foreground text-background"
-            >
-              Mulai
-            </Link>
+            {redirectUrl ? (
+              <Link
+                href={redirectUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-2 flex items-center justify-center h-9 text-sm font-medium rounded-md bg-foreground text-background"
+              >
+                Mulai
+              </Link>
+            ) : null}
           </nav>
         </div>
       )}
