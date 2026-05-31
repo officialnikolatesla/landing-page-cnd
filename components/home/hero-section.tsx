@@ -4,9 +4,33 @@ import { ArrowRight, Sparkles } from "lucide-react"
 
 type HeroSectionProps = {
   redirectUrl: string
+  keywords?: string[]
 }
 
-export function HeroSection({ redirectUrl }: HeroSectionProps) {
+function keywordDescription(keywords: string[] | undefined) {
+  const clean = Array.from(
+    new Set(
+      (keywords ?? [])
+        .map((keyword) => keyword.trim().toLowerCase())
+        .filter(Boolean),
+    ),
+  ).slice(0, 5)
+
+  if (clean.length === 0) {
+    return "Temukan pengalaman bola balap yang cepat, seru, dan mudah diakses setiap hari."
+  }
+
+  const topicList =
+    clean.length === 1
+      ? clean[0]
+      : `${clean.slice(0, -1).join(", ")} dan ${clean[clean.length - 1]}`
+
+  return `Temukan informasi dan pengalaman seputar ${topicList} dalam satu website yang ringkas dan mudah diakses.`
+}
+
+export function HeroSection({ redirectUrl, keywords }: HeroSectionProps) {
+  const buttonHref = redirectUrl || "#"
+
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden pt-16">
       <Image
@@ -34,19 +58,22 @@ export function HeroSection({ redirectUrl }: HeroSectionProps) {
           <span className="text-muted-foreground">#1</span>
         </h1>
 
+        <p className="mx-auto mb-8 max-w-2xl text-sm sm:text-base leading-7 text-muted-foreground">
+          {keywordDescription(keywords)}
+        </p>
+
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-          {redirectUrl ? (
-            <Link
-              href={redirectUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 h-11 px-6 rounded-md bg-foreground text-background text-sm font-medium hover:opacity-90 transition-opacity"
-            >
-              Masuk Sekarang
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          ) : null}
+          <Link
+            href={buttonHref}
+            target={redirectUrl ? "_blank" : undefined}
+            rel={redirectUrl ? "noopener noreferrer" : undefined}
+            aria-disabled={!redirectUrl}
+            className="inline-flex items-center gap-2 h-11 px-6 rounded-md bg-foreground text-background text-sm font-medium hover:opacity-90 transition-opacity"
+          >
+            Masuk sekarang
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </div>
     </section>

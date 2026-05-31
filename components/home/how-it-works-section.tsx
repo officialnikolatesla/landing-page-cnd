@@ -1,54 +1,93 @@
+import Image from "next/image"
+import Link from "next/link"
+import { ArrowRight, MousePointerClick } from "lucide-react"
+
 const steps = [
   {
     number: "01",
-    title: "Connect your API",
-    description:
-      "Point to your content API endpoint and configure your API key in the environment variables.",
+    title: "Buka halaman utama",
+    description: "Lihat info singkat Bola Balap dan pastikan tombol masuk sudah tersedia.",
   },
   {
     number: "02",
-    title: "Customize the design",
-    description:
-      "Swap out colors, fonts, and copy to match your brand. The design system is fully token-based.",
+    title: "Klik tombol masuk",
+    description: "Tekan tombol Masuk sekarang untuk diarahkan ke link permainan resmi.",
   },
   {
     number: "03",
-    title: "Deploy & publish",
-    description:
-      "Push to your host of choice. Articles and sitemaps are served automatically from your API.",
+    title: "Mulai bermain",
+    description: "Ikuti instruksi di halaman tujuan, pilih permainan, lalu nikmati bola balap.",
   },
 ]
 
-export function HowItWorksSection() {
+type HowItWorksSectionProps = {
+  redirectUrl: string
+}
+
+export function HowItWorksSection({ redirectUrl }: HowItWorksSectionProps) {
+  const buttonHref = redirectUrl || "#"
+
   return (
-    <section id="how-it-works" className="py-24 border-t border-border">
+    <section id="how-it-works" className="border-t border-border py-20 sm:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        {/* Header */}
-        <div className="max-w-xl mb-16">
-          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">
-            How it works
-          </p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground tracking-tight">
-            Up and running in minutes.
-          </h2>
+        <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+          <div>
+            <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+              Cara bermain
+            </p>
+            <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+              Main Bola Balap cukup lewat satu tombol.
+            </h2>
+            <p className="mt-4 max-w-xl text-sm leading-7 text-muted-foreground sm:text-base">
+              Website ini membantu kamu masuk ke halaman permainan dengan cepat. Klik tombol
+              masuk, lanjutkan ke link tujuan, lalu mulai pilih sesi Bola Balap yang ingin
+              dimainkan.
+            </p>
+
+            <Link
+              href={buttonHref}
+              target={redirectUrl ? "_blank" : undefined}
+              rel={redirectUrl ? "noopener noreferrer" : undefined}
+              aria-disabled={!redirectUrl}
+              className="mt-6 inline-flex h-11 items-center gap-2 rounded-md bg-foreground px-5 text-sm font-medium text-background transition-opacity hover:opacity-90"
+            >
+              <MousePointerClick className="h-4 w-4" />
+              Masuk sekarang
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-[1.15fr_0.85fr]">
+            <Image
+              src="/images/racing-balls-festive-bg.png"
+              alt="Bola balap di lintasan permainan"
+              width={900}
+              height={620}
+              className="aspect-[4/3] w-full rounded-lg border border-border object-cover"
+            />
+            <Image
+              src="/images/undian-wheel-of-fortune.png"
+              alt="Undian resmi Bola Balap"
+              width={520}
+              height={620}
+              className="aspect-[4/3] w-full rounded-lg border border-border object-cover sm:mt-10"
+            />
+          </div>
         </div>
 
-        {/* Steps */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-          {/* Connecting line (desktop) */}
-          <div className="hidden md:block absolute top-6 left-[calc(16.67%+1rem)] right-[calc(16.67%+1rem)] h-px bg-border" />
+        <div className="relative mt-14 grid grid-cols-1 gap-8 md:grid-cols-3">
+          <div className="absolute left-[calc(16.67%+1rem)] right-[calc(16.67%+1rem)] top-6 hidden h-px bg-border md:block" />
 
           {steps.map((step) => (
-            <div key={step.number} className="flex flex-col gap-4 relative">
-              {/* Number badge */}
-              <div className="w-12 h-12 rounded-full border border-border bg-background flex items-center justify-center z-10">
-                <span className="text-sm font-mono font-semibold text-muted-foreground">
+            <div key={step.number} className="relative flex flex-col gap-4">
+              <div className="z-10 flex h-12 w-12 items-center justify-center rounded-full border border-border bg-background">
+                <span className="font-mono text-sm font-semibold text-muted-foreground">
                   {step.number}
                 </span>
               </div>
               <div>
-                <h3 className="font-semibold text-foreground mb-1">{step.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <h3 className="mb-1 font-semibold text-foreground">{step.title}</h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">
                   {step.description}
                 </p>
               </div>
