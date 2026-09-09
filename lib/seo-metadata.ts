@@ -4,6 +4,10 @@ import { cache } from "react"
 import type { LandingPageMetadata, LandingPageMetadataResponse } from "@/types/seo-metadata"
 
 const REVALIDATE_SEC = 3600
+const BRAND_NAME = "Slot"
+const BRAND_TITLE = "Slot — A Refined Gaming Experience"
+const BRAND_DESCRIPTION =
+  "Discover curated games, practical guides, and a refined experience built for every moment."
 
 function apiBase(): string {
   const url = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "")
@@ -25,35 +29,33 @@ function ogLocaleToOpenGraph(locale: string): string {
 
 export function landingMetadataToNextMetadata(data: LandingPageMetadata): Metadata {
   return {
-    title: { absolute: data.meta_title },
-    description: data.meta_description,
+    title: { absolute: BRAND_TITLE },
+    description: BRAND_DESCRIPTION,
     keywords: data.meta_keywords,
     robots: parseRobots(data.robots),
     alternates: { canonical: data.canonical_url },
     openGraph: {
-      title: data.og_title,
-      description: data.og_description,
+      title: BRAND_TITLE,
+      description: BRAND_DESCRIPTION,
       url: data.og_url,
-      siteName: data.og_site_name,
+      siteName: BRAND_NAME,
       locale: ogLocaleToOpenGraph(data.og_locale),
       type: "website",
     },
     twitter: {
       card: data.twitter_card === "summary" ? "summary" : "summary_large_image",
-      title: data.twitter_title,
-      description: data.twitter_description,
+      title: BRAND_TITLE,
+      description: BRAND_DESCRIPTION,
     },
   }
 }
 
 export const defaultHomeMetadata: Metadata = {
-  title: { absolute: "Bola Balap — Your Modern Content Platform" },
-  description:
-    "A modern, minimal platform for sharing ideas, articles, and insights with the world.",
+  title: { absolute: BRAND_TITLE },
+  description: BRAND_DESCRIPTION,
   openGraph: {
-    title: "Bola Balap — Your Modern Content Platform",
-    description:
-      "A modern, minimal platform for sharing ideas, articles, and insights with the world.",
+    title: BRAND_TITLE,
+    description: BRAND_DESCRIPTION,
     type: "website",
   },
 }
@@ -119,20 +121,19 @@ export async function getRootLayoutMetadata(): Promise<Metadata> {
   if (!landing) {
     return {
       ...base,
-      title: { default: "Bola Balap", template: "%s | Bola Balap" },
+      title: { default: BRAND_NAME, template: `%s | ${BRAND_NAME}` },
       description: defaultHomeMetadata.description,
     }
   }
 
-  const siteName = landing.og_site_name || "Bola Balap"
   return {
     ...base,
-    title: { default: siteName, template: `%s | ${siteName}` },
-    description: landing.meta_description,
+    title: { default: BRAND_NAME, template: `%s | ${BRAND_NAME}` },
+    description: BRAND_DESCRIPTION,
     keywords: landing.meta_keywords,
     robots: parseRobots(landing.robots),
     openGraph: {
-      siteName: landing.og_site_name,
+      siteName: BRAND_NAME,
       locale: ogLocaleToOpenGraph(landing.og_locale),
       type: "website",
     },

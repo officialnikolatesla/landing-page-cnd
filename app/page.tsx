@@ -1,11 +1,12 @@
 import type { Metadata } from "next"
 
-import { FeaturesSection } from "@/components/home/features-section"
+import { ArticlesSection } from "@/components/home/articles-section"
 import { HeroSection } from "@/components/home/hero-section"
 import { HowItWorksSection } from "@/components/home/how-it-works-section"
-import { PromoSection } from "@/components/home/promo-section"
 import { NavbarShell } from "@/components/layout/navbar-shell"
+import { Footer } from "@/components/layout/footer"
 import { JsonLd } from "@/components/seo/json-ld"
+import { getArticles } from "@/lib/api"
 import { getHomePageMetadata, getRedirectUrl, getLandingPageMetadata } from "@/lib/seo-metadata"
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -13,9 +14,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function HomePage() {
-  const [landingMeta, redirectUrl] = await Promise.all([
+  const [landingMeta, redirectUrl, articleData] = await Promise.all([
     getLandingPageMetadata(),
     getRedirectUrl(),
+    getArticles(1, 3).catch(() => null),
   ])
   const keywords = landingMeta?.target_keywords?.length
     ? landingMeta.target_keywords
@@ -27,10 +29,10 @@ export default async function HomePage() {
       <NavbarShell />
       <main>
         <HeroSection redirectUrl={redirectUrl} keywords={keywords} />
-        <PromoSection redirectUrl={redirectUrl} />
         <HowItWorksSection redirectUrl={redirectUrl} />
-        <FeaturesSection />
+        <ArticlesSection articles={articleData?.items ?? []} />
       </main>
+      <Footer />
     </>
   )
 }

@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, Clock } from "lucide-react"
 import type { Article } from "@/types/article"
 
 function formatDate(iso: string) {
@@ -12,10 +12,38 @@ function formatDate(iso: string) {
 
 type Props = {
   article: Article
-  variant?: "default" | "compact"
+  variant?: "default" | "compact" | "featured"
 }
 
 export function ArticleCard({ article, variant = "default" }: Props) {
+  if (variant === "featured") {
+    return (
+      <article className="group flex min-h-72 flex-col rounded-2xl border border-border bg-card/75 p-6 transition-all hover:-translate-y-1 hover:border-primary/45">
+        <div className="mb-12 flex items-center justify-between gap-4">
+          <span className="rounded-full bg-primary/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-primary">
+            {article.cluster?.topicName ?? "Insight"}
+          </span>
+          <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
+            <Clock className="h-3.5 w-3.5" /> {article.readingTime} min
+          </span>
+        </div>
+        <Link href={`/articles/${article.slug}`} className="mt-auto">
+          <h3 className="line-clamp-3 text-xl font-bold leading-snug tracking-tight transition-colors group-hover:text-primary">
+            {article.title}
+          </h3>
+          {article.excerpt ? (
+            <p className="mt-3 line-clamp-2 text-sm leading-6 text-muted-foreground">
+              {article.excerpt}
+            </p>
+          ) : null}
+          <span className="mt-6 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-primary">
+            Read article <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+          </span>
+        </Link>
+      </article>
+    )
+  }
+
   if (variant === "compact") {
     return (
       <article>
@@ -38,12 +66,12 @@ export function ArticleCard({ article, variant = "default" }: Props) {
 
   // Default: horizontal list row
   return (
-    <article className="group flex items-start justify-between gap-6 py-6 border-b border-border last:border-0">
+    <article className="group flex items-start justify-between gap-6 border-b border-border py-7 last:border-0">
       <div className="flex-1 min-w-0 space-y-2">
         {/* Meta */}
         <div className="flex items-center gap-2 flex-wrap">
           {article.cluster && (
-            <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
+            <span className="rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
               {article.cluster.topicName}
             </span>
           )}
@@ -60,7 +88,7 @@ export function ArticleCard({ article, variant = "default" }: Props) {
 
         {/* Title */}
         <Link href={`/articles/${article.slug}`}>
-          <h2 className="text-base sm:text-lg font-semibold text-foreground group-hover:text-muted-foreground transition-colors leading-snug">
+          <h2 className="text-lg font-bold leading-snug text-foreground transition-colors group-hover:text-primary sm:text-xl">
             {article.title}
           </h2>
         </Link>
@@ -76,7 +104,7 @@ export function ArticleCard({ article, variant = "default" }: Props) {
       {/* Arrow */}
       <Link
         href={`/articles/${article.slug}`}
-        className="shrink-0 mt-1 p-2 rounded-full border border-border text-muted-foreground group-hover:border-foreground/30 group-hover:text-foreground transition-colors"
+        className="mt-1 shrink-0 rounded-full border border-border p-2 text-muted-foreground transition-colors group-hover:border-primary/50 group-hover:text-primary"
         aria-label={`Read ${article.title}`}
       >
         <ArrowRight className="h-4 w-4" />

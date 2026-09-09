@@ -8,6 +8,7 @@ import { ArticleCard } from "@/components/article-card"
 import { ReadingProgress } from "@/components/reading-progress"
 import { BackToTop } from "@/components/back-to-top"
 import { getArticle, getRelatedArticles } from "@/lib/api"
+import { JsonLd } from "@/components/seo/json-ld"
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -57,16 +58,17 @@ export default async function ArticleDetailPage({ params }: Props) {
 
   return (
     <>
+      {article.schemaJsonld ? <JsonLd data={article.schemaJsonld} /> : null}
       <ReadingProgress />
       <BackToTop />
       <NavbarShell />
       <main className="min-h-screen pt-16">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 py-12">
+        <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-20">
           {/* Breadcrumb */}
           <nav className="mb-8" aria-label="Breadcrumb">
             <Link
               href="/articles"
-              className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-muted-foreground transition-colors hover:text-primary"
             >
               <ChevronLeft className="h-4 w-4" />
               All Articles
@@ -78,7 +80,7 @@ export default async function ArticleDetailPage({ params }: Props) {
             {/* Category + keyword */}
             <div className="flex items-center gap-2 flex-wrap mb-4">
               {article.cluster && (
-                <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-muted text-muted-foreground">
+                <span className="rounded-full bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary">
                   {article.cluster.topicName}
                 </span>
               )}
@@ -89,7 +91,7 @@ export default async function ArticleDetailPage({ params }: Props) {
               )}
             </div>
 
-            <h1 className="text-3xl sm:text-4xl font-bold text-foreground tracking-tight leading-tight mb-4">
+            <h1 className="text-balance mb-5 text-4xl font-bold leading-[1.08] tracking-[-0.04em] text-foreground sm:text-6xl">
               {article.title}
             </h1>
 
@@ -100,7 +102,7 @@ export default async function ArticleDetailPage({ params }: Props) {
             )}
 
             {/* Meta row */}
-            <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground border-t border-b border-border py-4">
+            <div className="flex flex-wrap items-center gap-4 border-y border-border py-4 text-sm text-muted-foreground">
               <span className="flex items-center gap-1.5">
                 <Calendar className="h-4 w-4" />
                 <time dateTime={article.createdAt}>
@@ -120,7 +122,7 @@ export default async function ArticleDetailPage({ params }: Props) {
 
           {/* Article body — strip leading <h1> to avoid duplicate title */}
           <div
-            className="prose prose-zinc dark:prose-invert max-w-none prose-headings:font-semibold prose-a:text-foreground prose-a:underline-offset-4 prose-code:text-sm"
+            className="prose prose-zinc max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:text-primary prose-a:underline-offset-4 prose-code:text-sm dark:prose-invert"
             dangerouslySetInnerHTML={{
               __html: article.contentHtml.replace(/^<h1[^>]*>.*?<\/h1>\s*/i, ""),
             }}
@@ -129,10 +131,10 @@ export default async function ArticleDetailPage({ params }: Props) {
 
         {/* Related articles */}
         {related.length > 0 && (
-          <div className="border-t border-border">
+          <div className="border-t border-border/70 bg-card/25">
             <div className="mx-auto max-w-6xl px-4 sm:px-6 py-12">
-              <h2 className="text-xl font-semibold text-foreground mb-6">
-                Related Articles
+              <h2 className="mb-6 text-2xl font-bold tracking-tight text-foreground">
+                Related articles
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 {related.map((rel) => (
@@ -143,6 +145,7 @@ export default async function ArticleDetailPage({ params }: Props) {
           </div>
         )}
       </main>
+      <Footer />
     </>
   )
 }

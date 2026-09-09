@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useTheme } from "next-themes"
-import { Moon, Sun, Menu, X } from "lucide-react"
+import { Moon, Sun, Menu, X, ArrowUpRight } from "lucide-react"
 import { useState, useEffect } from "react"
 import { cn } from "@/lib/utils"
 
@@ -12,12 +12,14 @@ type NavbarProps = {
 }
 
 const navLinks = [
-  { href: "/", label: "Home" }
+  { href: "/", label: "Home" },
+  { href: "/#how-it-works", label: "How it works" },
+  { href: "/articles", label: "Articles" },
 ]
 
 export function Navbar({ redirectUrl }: NavbarProps) {
   const pathname = usePathname()
-  const { theme, setTheme } = useTheme()
+  const { resolvedTheme, setTheme } = useTheme()
   const [mobileOpen, setMobileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [prevPathname, setPrevPathname] = useState(pathname)
@@ -38,17 +40,23 @@ export function Navbar({ redirectUrl }: NavbarProps) {
       className={cn(
         "fixed top-0 inset-x-0 z-50 transition-all duration-200",
         scrolled
-          ? "bg-background/80 backdrop-blur-md border-b border-border"
+          ? "border-b border-border bg-background/82 shadow-lg shadow-black/5 backdrop-blur-xl"
           : "bg-transparent"
       )}
     >
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 h-16 flex items-center justify-between">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         {/* Logo */}
         <Link
           href="/"
-          className="font-semibold text-lg tracking-tight text-foreground hover:opacity-80 transition-opacity"
+          className="flex items-center gap-2 text-lg font-bold tracking-[-0.03em] text-foreground transition-opacity hover:opacity-80"
         >
-          Bola Balap<span className="text-muted-foreground">.</span>
+          <span className="grid h-7 w-7 grid-cols-2 gap-1 rounded-lg bg-primary p-1.5 shadow-[0_0_20px_-5px_var(--primary)]">
+            <span className="rounded-sm bg-white" />
+            <span className="rounded-full bg-white/70" />
+            <span className="rounded-full bg-white/70" />
+            <span className="rounded-sm bg-white" />
+          </span>
+          Slot<span className="text-primary">.</span>
         </Link>
 
         {/* Desktop nav */}
@@ -59,7 +67,7 @@ export function Navbar({ redirectUrl }: NavbarProps) {
               href={link.href}
               className={cn(
                 "text-sm transition-colors",
-                pathname === link.href
+                pathname === link.href || (link.href === "/articles" && pathname.startsWith("/articles"))
                   ? "text-foreground font-medium"
                   : "text-muted-foreground hover:text-foreground"
               )}
@@ -72,7 +80,7 @@ export function Navbar({ redirectUrl }: NavbarProps) {
         {/* Actions */}
         <div className="flex items-center gap-2">
           <button
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
             className="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
             aria-label="Toggle theme"
           >
@@ -85,9 +93,10 @@ export function Navbar({ redirectUrl }: NavbarProps) {
               href={redirectUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden md:inline-flex items-center h-8 px-4 text-sm font-medium rounded-md bg-foreground text-background hover:opacity-90 transition-opacity"
-            >
-              Mulai
+            className="hidden h-9 items-center gap-1.5 rounded-full bg-primary px-4 text-sm font-bold text-primary-foreground transition-transform hover:-translate-y-0.5 md:inline-flex"
+          >
+            Play now
+            <ArrowUpRight className="h-3.5 w-3.5" />
             </Link>
           ) : null}
 
@@ -111,7 +120,7 @@ export function Navbar({ redirectUrl }: NavbarProps) {
                 href={link.href}
                 className={cn(
                   "py-2 px-3 rounded-md text-sm transition-colors",
-                  pathname === link.href
+                    pathname === link.href || (link.href === "/articles" && pathname.startsWith("/articles"))
                     ? "bg-accent text-foreground font-medium"
                     : "text-muted-foreground hover:text-foreground hover:bg-accent"
                 )}
@@ -124,9 +133,9 @@ export function Navbar({ redirectUrl }: NavbarProps) {
                 href={redirectUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-2 flex items-center justify-center h-9 text-sm font-medium rounded-md bg-foreground text-background"
+                className="mt-2 flex h-10 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground"
               >
-                Mulai
+                Play now
               </Link>
             ) : null}
           </nav>

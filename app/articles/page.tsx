@@ -1,17 +1,18 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import { NavbarShell } from "@/components/layout/navbar-shell"
-import { Footer } from "@/components/layout/footer"
+import { ArrowRight, BookOpen, ChevronLeft, ChevronRight, Compass } from "lucide-react"
+
 import { ArticleCard } from "@/components/article-card"
-import { getArticles } from "@/lib/api"
 import { BackToTop } from "@/components/back-to-top"
+import { Footer } from "@/components/layout/footer"
+import { NavbarShell } from "@/components/layout/navbar-shell"
+import { getArticles } from "@/lib/api"
 
 export const metadata: Metadata = {
-  title: "Articles | Bola Balap",
+  title: "Articles | Slot",
   description: "Browse the latest articles, guides, and insights.",
   openGraph: {
-    title: "Articles | Bola Balap",
+    title: "Articles | Slot",
     description: "Browse the latest articles, guides, and insights.",
     type: "website",
   },
@@ -23,14 +24,15 @@ type Props = {
 
 export default async function ArticlesPage({ searchParams }: Props) {
   const params = await searchParams
-  const page = Math.max(1, Number(params.page ?? 1))
+  const requestedPage = Number(params.page ?? 1)
+  const page = Number.isFinite(requestedPage) ? Math.max(1, requestedPage) : 1
 
   let data
   let error: string | null = null
   try {
     data = await getArticles(page, 20)
   } catch {
-    error = "Failed to load articles. Please try again later."
+    error = "Articles could not be loaded. Please try again in a moment."
   }
 
   const pagination = data?.pagination
@@ -41,127 +43,106 @@ export default async function ArticlesPage({ searchParams }: Props) {
       <BackToTop />
       <NavbarShell />
       <main className="min-h-screen pt-16">
-        {/* Page header */}
-        <div className="border-b border-border">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 py-10">
-            <h1 className="text-3xl sm:text-4xl font-bold text-foreground tracking-tight mb-1">
-              Latest Articles
-            </h1>
-            <p className="text-muted-foreground text-sm">
-              {pagination
-                ? `${pagination.total} articles across all topics`
-                : "Browse the latest articles, guides, and insights."}
+        <header className="relative isolate overflow-hidden border-b border-border/70 py-16 sm:py-24">
+          <div className="panel-grid absolute inset-0 -z-20 opacity-45" />
+          <div className="absolute -left-24 top-0 -z-10 h-72 w-72 rounded-full bg-primary/15 blur-3xl" />
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
+            <p className="mb-4 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.22em] text-primary">
+              <BookOpen className="h-3.5 w-3.5" /> Knowledge hub
             </p>
+            <h1 className="text-balance max-w-3xl text-4xl font-bold tracking-[-0.045em] sm:text-6xl">
+              Insight for every step of the game.
+            </h1>
+            <p className="mt-5 max-w-2xl text-base leading-7 text-muted-foreground">
+              Guides, updates, and fresh perspectives to help you approach every moment with
+              more confidence.
+            </p>
+            {pagination ? (
+              <p className="mt-8 font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                {pagination.total.toString().padStart(2, "0")} articles available
+              </p>
+            ) : null}
           </div>
-        </div>
+        </header>
 
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 py-10">
-          {/* Error state */}
-          {error && (
-            <div className="rounded-lg border border-destructive/30 bg-destructive/10 p-6 text-center text-sm text-destructive">
+        <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
+          {error ? (
+            <div className="rounded-2xl border border-primary/30 bg-primary/10 p-6 text-center text-sm text-primary">
               {error}
             </div>
-          )}
+          ) : null}
 
-          {/* Empty state */}
-          {!error && articles.length === 0 && (
-            <div className="py-24 text-center">
-              <p className="text-muted-foreground">No articles found.</p>
+          {!error && articles.length === 0 ? (
+            <div className="rounded-2xl border border-border bg-card py-24 text-center">
+              <BookOpen className="mx-auto mb-4 h-8 w-8 text-muted-foreground" />
+              <p className="font-semibold">No articles yet.</p>
+              <p className="mt-1 text-sm text-muted-foreground">New content will appear here.</p>
             </div>
-          )}
+          ) : null}
 
-          {/* 75/25 layout */}
-          {articles.length > 0 && (
-            <div className="flex flex-col lg:flex-row gap-10">
-
-              {/* Article list — 75% */}
-              <div className="flex-1 min-w-0">
-                <div>
+          {articles.length > 0 ? (
+            <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_18rem]">
+              <div className="min-w-0">
+                <div className="border-t border-border">
                   {articles.map((article) => (
                     <ArticleCard key={article.id} article={article} />
                   ))}
                 </div>
 
-                {/* Pagination */}
-                {pagination && pagination.totalPages > 1 && (
-                  <nav
-                    className="mt-10 flex items-center justify-between"
-                    aria-label="Pagination"
-                  >
+                {pagination && pagination.totalPages > 1 ? (
+                  <nav className="mt-10 flex items-center justify-between" aria-label="Pagination">
                     {page > 1 ? (
                       <Link
                         href={`/articles?page=${page - 1}`}
                         rel="prev"
-                        className="inline-flex items-center gap-1.5 h-9 px-4 rounded-md border border-border text-sm text-foreground hover:bg-accent transition-colors"
+                        className="inline-flex h-10 items-center gap-1.5 rounded-full border border-border bg-card px-4 text-sm font-semibold transition-colors hover:border-primary/50 hover:text-primary"
                       >
-                        <ChevronLeft className="h-4 w-4" />
-                        Previous
+                        <ChevronLeft className="h-4 w-4" /> Previous
                       </Link>
                     ) : (
                       <div />
                     )}
-                    <p className="text-sm text-muted-foreground">
-                      Page {pagination.page} of {pagination.totalPages}
+                    <p className="font-mono text-xs text-muted-foreground">
+                      {pagination.page.toString().padStart(2, "0")} / {pagination.totalPages.toString().padStart(2, "0")}
                     </p>
                     {page < pagination.totalPages ? (
                       <Link
                         href={`/articles?page=${page + 1}`}
                         rel="next"
-                        className="inline-flex items-center gap-1.5 h-9 px-4 rounded-md border border-border text-sm text-foreground hover:bg-accent transition-colors"
+                        className="inline-flex h-10 items-center gap-1.5 rounded-full border border-border bg-card px-4 text-sm font-semibold transition-colors hover:border-primary/50 hover:text-primary"
                       >
-                        Next
-                        <ChevronRight className="h-4 w-4" />
+                        Next <ChevronRight className="h-4 w-4" />
                       </Link>
                     ) : (
                       <div />
                     )}
                   </nav>
-                )}
+                ) : null}
               </div>
 
-              {/* Sidebar — 25% */}
-              <aside className="lg:w-72 shrink-0 space-y-6">
-                {/* Placeholder widget 1 */}
-                <div className="rounded-xl border border-border bg-card p-5 space-y-3">
-                  <div className="h-4 w-24 rounded bg-muted" />
-                  <div className="space-y-2">
-                    <div className="h-3 w-full rounded bg-muted" />
-                    <div className="h-3 w-4/5 rounded bg-muted" />
-                    <div className="h-3 w-3/5 rounded bg-muted" />
-                  </div>
-                  <div className="h-8 w-full rounded-md bg-muted" />
+              <aside className="space-y-5">
+                <div className="rounded-2xl border border-border bg-card p-6">
+                  <Compass className="mb-5 h-6 w-6 text-primary" />
+                  <h2 className="font-bold">Start here</h2>
+                  <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                    Return to the home page to see the latest selections and experiences.
+                  </p>
+                  <Link href="/" className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-primary">
+                    Explore home <ArrowRight className="h-4 w-4" />
+                  </Link>
                 </div>
-
-                {/* Placeholder widget 2 */}
-                <div className="rounded-xl border border-border bg-card p-5 space-y-3">
-                  <div className="h-4 w-32 rounded bg-muted" />
-                  <div className="space-y-2.5">
-                    {[1, 2, 3, 4].map((i) => (
-                      <div key={i} className="flex items-center gap-3">
-                        <div className="h-8 w-8 rounded-full bg-muted shrink-0" />
-                        <div className="flex-1 space-y-1.5">
-                          <div className="h-3 w-full rounded bg-muted" />
-                          <div className="h-2.5 w-3/4 rounded bg-muted" />
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Placeholder widget 3 */}
-                <div className="rounded-xl border border-border bg-card p-5 space-y-3">
-                  <div className="h-4 w-20 rounded bg-muted" />
-                  <div className="flex flex-wrap gap-2">
-                    {[80, 60, 90, 70, 50, 75].map((w, i) => (
-                      <div key={i} className={`h-6 rounded-full bg-muted`} style={{ width: `${w / 4}px` }} />
-                    ))}
-                  </div>
+                <div className="rounded-2xl border border-primary/20 bg-primary/10 p-6">
+                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Note</p>
+                  <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                    Use this information as a reference and always approach play responsibly.
+                  </p>
                 </div>
               </aside>
             </div>
-          )}
+          ) : null}
         </div>
       </main>
+      <Footer />
     </>
   )
 }
