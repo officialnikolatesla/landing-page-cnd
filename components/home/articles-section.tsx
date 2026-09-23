@@ -21,10 +21,12 @@ export function ArticlesSection({ articles }: ArticlesSectionProps) {
             <p className="mb-4 flex items-center gap-2 text-xs font-extrabold tracking-[0.24em] text-primary uppercase">
               <Newspaper className="h-3.5 w-3.5" /> Catatan Market Indo
             </p>
-            <h2 className="font-heading text-4xl leading-[0.95] font-black tracking-[-0.045em] text-balance uppercase sm:text-6xl">
-              Baca tren.
+            <h2 className="font-heading text-3xl leading-[1.02] font-semibold tracking-[-0.04em] text-balance sm:text-5xl">
+              Baca tren,
               <br />
-              Kenali permainannya.
+              <span className="font-editorial font-normal text-primary italic">
+                kenali permainannya.
+              </span>
             </h2>
           </div>
           <Link

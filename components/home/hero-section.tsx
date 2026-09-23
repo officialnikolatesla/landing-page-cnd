@@ -40,16 +40,18 @@ export function HeroSection({ redirectUrl, keywords }: HeroSectionProps) {
             <span>Edisi / 01</span>
           </div>
 
-          <div className="py-14 lg:py-20">
-            <div className="mb-6 inline-flex -rotate-2 items-center gap-2 bg-primary px-3 py-1.5 text-xs font-extrabold tracking-[0.16em] text-primary-foreground uppercase shadow-[4px_4px_0_var(--foreground)]">
+          <div className="py-14 lg:py-16">
+            <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/8 px-3.5 py-2 text-[10px] font-semibold tracking-[0.18em] text-primary uppercase">
               <Sparkles className="h-3.5 w-3.5" /> Pilihan hari ini
             </div>
-            <h1 className="font-heading text-[clamp(3.45rem,15vw,8.6rem)] leading-[0.78] font-black tracking-[-0.075em] uppercase">
+            <h1 className="font-heading text-[clamp(3.15rem,7.2vw,6.4rem)] leading-[0.9] font-semibold tracking-[-0.06em]">
               Market
               <br />
-              <span className="text-primary">Indo.</span>
+              <span className="font-editorial font-normal text-primary italic">
+                Indo.
+              </span>
             </h1>
-            <p className="mt-8 max-w-xl text-base leading-7 break-words text-muted-foreground sm:text-lg">
+            <p className="mt-8 max-w-lg text-base leading-7 break-words text-muted-foreground sm:text-lg">
               Ruang temu game yang sedang ramai di pasar Indonesia—pilihan
               segar, panduan ringkas, dan akses cepat dalam satu halaman.
             </p>
@@ -60,14 +62,14 @@ export function HeroSection({ redirectUrl, keywords }: HeroSectionProps) {
                 target={redirectUrl ? "_blank" : undefined}
                 rel={redirectUrl ? "noopener noreferrer" : undefined}
                 aria-disabled={!redirectUrl}
-                className="group inline-flex h-13 items-center justify-center gap-3 bg-primary px-6 text-sm font-extrabold tracking-[0.08em] text-primary-foreground uppercase shadow-[5px_5px_0_var(--foreground)] transition-transform hover:-translate-y-1"
+                className="group inline-flex h-12 items-center justify-center gap-2.5 rounded-full bg-primary px-6 text-xs font-semibold tracking-[0.1em] text-primary-foreground uppercase shadow-lg shadow-primary/15 transition-all hover:-translate-y-0.5 hover:shadow-xl"
               >
                 Lihat pilihan game{" "}
                 <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
               <Link
                 href="/articles"
-                className="inline-flex h-13 items-center justify-center gap-3 border-2 border-foreground bg-background px-6 text-sm font-extrabold tracking-[0.08em] uppercase transition-colors hover:bg-foreground hover:text-background"
+                className="inline-flex h-12 items-center justify-center gap-2.5 rounded-full border border-border bg-card/70 px-6 text-xs font-semibold tracking-[0.1em] uppercase transition-colors hover:border-primary/40 hover:text-primary"
               >
                 Baca artikel <ArrowDownRight className="h-4 w-4" />
               </Link>
@@ -100,10 +102,12 @@ export function HeroSection({ redirectUrl, keywords }: HeroSectionProps) {
               <p className="text-xs font-bold tracking-[0.25em] text-primary uppercase">
                 Sedang ramai
               </p>
-              <p className="mt-3 font-heading text-4xl leading-none font-black uppercase sm:text-5xl">
+              <p className="mt-3 font-heading text-3xl leading-none font-semibold tracking-[-0.04em] sm:text-4xl">
                 Main
                 <br />
-                sesukamu
+                <span className="font-editorial font-normal italic">
+                  sesukamu
+                </span>
               </p>
               <div className="mx-auto mt-6 h-1 w-14 bg-primary" />
               <p className="mt-5 text-xs leading-5 text-[#6d5a55]">

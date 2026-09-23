@@ -15,9 +15,12 @@ export function Footer() {
           <div className="space-y-2">
             <Link
               href="/"
-              className="font-heading text-2xl font-black tracking-tight text-white uppercase transition-opacity hover:opacity-80"
+              className="font-heading text-xl font-semibold tracking-tight text-white transition-opacity hover:opacity-80"
             >
-              Market <span className="text-red-500">Indo.</span>
+              Market{" "}
+              <span className="font-editorial font-normal text-red-400 italic">
+                Indo.
+              </span>
             </Link>
             <p className="max-w-xs text-sm leading-6 text-slate-400">
               Kurasi game dan wawasan lokal untuk pemain Indonesia yang ingin

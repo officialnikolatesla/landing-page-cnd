@@ -58,8 +58,11 @@ export default async function ArticlesPage({ searchParams }: Props) {
             <p className="mb-4 flex items-center gap-2 text-xs font-bold tracking-[0.22em] text-primary uppercase">
               <BookOpen className="h-3.5 w-3.5" /> Pusat bacaan
             </p>
-            <h1 className="max-w-4xl font-heading text-5xl leading-[0.95] font-black tracking-[-0.05em] text-balance uppercase sm:text-7xl">
-              Cerita game dari sudut Indonesia.
+            <h1 className="max-w-4xl font-heading text-4xl leading-[1.02] font-semibold tracking-[-0.045em] text-balance sm:text-6xl">
+              Cerita game dari sudut{" "}
+              <span className="font-editorial font-normal text-primary italic">
+                Indonesia.
+              </span>
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-7 text-muted-foreground">
               Panduan, kabar, dan perspektif segar untuk memahami game yang

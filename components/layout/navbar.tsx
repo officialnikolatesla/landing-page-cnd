@@ -48,7 +48,7 @@ export function Navbar({ redirectUrl }: NavbarProps) {
         {/* Logo */}
         <Link
           href="/"
-          className="flex items-center gap-2.5 text-lg font-black tracking-[-0.04em] text-foreground uppercase transition-opacity hover:opacity-80"
+          className="flex items-center gap-2.5 text-base font-semibold tracking-[-0.03em] text-foreground transition-opacity hover:opacity-80"
         >
           <span className="grid h-8 w-8 rotate-45 grid-cols-2 gap-0.5 border-2 border-primary p-1.5">
             <span className="bg-primary" />
@@ -57,7 +57,10 @@ export function Navbar({ redirectUrl }: NavbarProps) {
             <span className="bg-primary" />
           </span>
           <span>
-            Market <span className="text-primary">Indo.</span>
+            Market{" "}
+            <span className="font-editorial font-normal text-primary italic">
+              Indo.
+            </span>
           </span>
         </Link>
 

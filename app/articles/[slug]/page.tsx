@@ -91,7 +91,7 @@ export default async function ArticleDetailPage({ params }: Props) {
               )}
             </div>
 
-            <h1 className="mb-5 text-4xl leading-[1.08] font-bold tracking-[-0.04em] text-balance text-foreground sm:text-6xl">
+            <h1 className="mb-5 text-3xl leading-[1.12] font-semibold tracking-[-0.035em] text-balance text-foreground sm:text-5xl">
               {article.title}
             </h1>
 

@@ -41,10 +41,12 @@ export function HowItWorksSection({ redirectUrl }: HowItWorksSectionProps) {
           <p className="text-xs font-extrabold tracking-[0.24em] text-primary uppercase">
             Cara menjelajah / 3 langkah
           </p>
-          <h2 className="font-heading text-4xl leading-[0.95] font-black tracking-[-0.045em] text-balance uppercase sm:text-6xl">
+          <h2 className="font-heading text-3xl leading-[1.02] font-semibold tracking-[-0.04em] text-balance sm:text-5xl">
             Dari pasar lokal,
             <br />
-            <span className="outline-title">untuk pemain lokal.</span>
+            <span className="font-editorial font-normal text-primary italic">
+              untuk pemain lokal.
+            </span>
           </h2>
         </div>
 
@@ -62,7 +64,7 @@ export function HowItWorksSection({ redirectUrl }: HowItWorksSectionProps) {
                 <p className="text-[10px] font-extrabold tracking-[0.22em] text-[#c8252c] uppercase">
                   Rasa Nusantara
                 </p>
-                <p className="mt-1 max-w-sm font-heading text-xl leading-tight font-black uppercase sm:text-2xl">
+                <p className="mt-1 max-w-sm font-heading text-lg leading-tight font-semibold sm:text-xl">
                   Visual lokal, pengalaman modern.
                 </p>
               </div>
@@ -88,7 +90,7 @@ export function HowItWorksSection({ redirectUrl }: HowItWorksSectionProps) {
                   />
                 </div>
                 <div>
-                  <h3 className="font-heading text-xl font-black tracking-tight uppercase sm:text-2xl">
+                  <h3 className="font-heading text-lg font-semibold tracking-tight sm:text-xl">
                     {title}
                   </h3>
                   <p className="mt-3 text-sm leading-6 text-muted-foreground">
