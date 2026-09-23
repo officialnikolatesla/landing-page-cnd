@@ -32,12 +32,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       },
     }
   } catch {
-    return { title: "Article Not Found" }
+    return { title: "Artikel Tidak Ditemukan" }
   }
 }
 
 function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString("en-US", {
+  return new Date(iso).toLocaleDateString("id-ID", {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -71,14 +71,14 @@ export default async function ArticleDetailPage({ params }: Props) {
               className="inline-flex items-center gap-1.5 text-sm font-semibold text-muted-foreground transition-colors hover:text-primary"
             >
               <ChevronLeft className="h-4 w-4" />
-              All Articles
+              Semua Artikel
             </Link>
           </nav>
 
           {/* Article header */}
           <header className="mb-10">
             {/* Category + keyword */}
-            <div className="flex items-center gap-2 flex-wrap mb-4">
+            <div className="mb-4 flex flex-wrap items-center gap-2">
               {article.cluster && (
                 <span className="rounded-full bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary">
                   {article.cluster.topicName}
@@ -91,12 +91,12 @@ export default async function ArticleDetailPage({ params }: Props) {
               )}
             </div>
 
-            <h1 className="text-balance mb-5 text-4xl font-bold leading-[1.08] tracking-[-0.04em] text-foreground sm:text-6xl">
+            <h1 className="mb-5 text-4xl leading-[1.08] font-bold tracking-[-0.04em] text-balance text-foreground sm:text-6xl">
               {article.title}
             </h1>
 
             {article.excerpt && (
-              <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+              <p className="mb-6 text-lg leading-relaxed text-muted-foreground">
                 {article.excerpt}
               </p>
             )}
@@ -111,20 +111,23 @@ export default async function ArticleDetailPage({ params }: Props) {
               </span>
               <span className="flex items-center gap-1.5">
                 <Clock className="h-4 w-4" />
-                {article.readingTime} min read
+                {article.readingTime} menit baca
               </span>
               <span className="flex items-center gap-1.5">
                 <BookOpen className="h-4 w-4" />
-                {article.wordCount.toLocaleString()} words
+                {article.wordCount.toLocaleString("id-ID")} kata
               </span>
             </div>
           </header>
 
           {/* Article body — strip leading <h1> to avoid duplicate title */}
           <div
-            className="prose prose-zinc max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:text-primary prose-a:underline-offset-4 prose-code:text-sm dark:prose-invert"
+            className="prose max-w-none prose-zinc dark:prose-invert prose-headings:font-bold prose-headings:tracking-tight prose-a:text-primary prose-a:underline-offset-4 prose-code:text-sm"
             dangerouslySetInnerHTML={{
-              __html: article.contentHtml.replace(/^<h1[^>]*>.*?<\/h1>\s*/i, ""),
+              __html: article.contentHtml.replace(
+                /^<h1[^>]*>.*?<\/h1>\s*/i,
+                ""
+              ),
             }}
           />
         </div>
@@ -132,11 +135,11 @@ export default async function ArticleDetailPage({ params }: Props) {
         {/* Related articles */}
         {related.length > 0 && (
           <div className="border-t border-border/70 bg-card/25">
-            <div className="mx-auto max-w-6xl px-4 sm:px-6 py-12">
+            <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
               <h2 className="mb-6 text-2xl font-bold tracking-tight text-foreground">
-                Related articles
+                Artikel terkait
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 {related.map((rel) => (
                   <ArticleCard key={rel.id} article={rel} />
                 ))}

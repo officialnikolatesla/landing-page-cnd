@@ -15,11 +15,7 @@ export default async function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className="font-sans antialiased"
-    >
+    <html lang="id" suppressHydrationWarning className="font-sans antialiased">
       <body>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-37V4RRVB9B"

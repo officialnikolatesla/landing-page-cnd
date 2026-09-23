@@ -1,26 +1,27 @@
 import Link from "next/link"
 
 const footerLinks = [
-  { href: "/", label: "Home" },
-  { href: "/articles", label: "Articles" },
+  { href: "/", label: "Beranda" },
+  { href: "/articles", label: "Artikel" },
   { href: "/sitemap.xml", label: "Sitemap" },
 ]
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-[#07132c] text-white dark:bg-[#07132c]">
-      <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+    <footer className="border-t-8 border-primary bg-[#241817] text-white">
+      <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6">
+        <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
           {/* Brand */}
           <div className="space-y-2">
             <Link
               href="/"
-              className="text-lg font-bold tracking-tight text-white transition-opacity hover:opacity-80"
+              className="font-heading text-2xl font-black tracking-tight text-white uppercase transition-opacity hover:opacity-80"
             >
-              Slot<span className="text-red-500">.</span>
+              Market <span className="text-red-500">Indo.</span>
             </Link>
             <p className="max-w-xs text-sm leading-6 text-slate-400">
-              Curated games and fresh insights, designed for a fast and focused experience.
+              Kurasi game dan wawasan lokal untuk pemain Indonesia yang ingin
+              menjelajah dengan lebih praktis.
             </p>
           </div>
 
@@ -40,10 +41,10 @@ export function Footer() {
 
         <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 sm:flex-row">
           <p className="text-xs text-slate-500">
-            © {new Date().getFullYear()} Slot. All rights reserved.
+            © {new Date().getFullYear()} Market Indo. Hak cipta dilindungi.
           </p>
           <p className="text-xs text-slate-500">
-            Play responsibly and stay in control.
+            Bermainlah secara bertanggung jawab dan tetap pegang kendali.
           </p>
         </div>
       </div>

@@ -7,7 +7,11 @@ import { NavbarShell } from "@/components/layout/navbar-shell"
 import { Footer } from "@/components/layout/footer"
 import { JsonLd } from "@/components/seo/json-ld"
 import { getArticles } from "@/lib/api"
-import { getHomePageMetadata, getRedirectUrl, getLandingPageMetadata } from "@/lib/seo-metadata"
+import {
+  getHomePageMetadata,
+  getRedirectUrl,
+  getLandingPageMetadata,
+} from "@/lib/seo-metadata"
 
 export async function generateMetadata(): Promise<Metadata> {
   return getHomePageMetadata()
@@ -25,7 +29,9 @@ export default async function HomePage() {
 
   return (
     <>
-      {landingMeta?.schema_jsonld ? <JsonLd data={landingMeta.schema_jsonld} /> : null}
+      {landingMeta?.schema_jsonld ? (
+        <JsonLd data={landingMeta.schema_jsonld} />
+      ) : null}
       <NavbarShell />
       <main>
         <HeroSection redirectUrl={redirectUrl} keywords={keywords} />

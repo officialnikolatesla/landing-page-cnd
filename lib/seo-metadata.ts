@@ -1,13 +1,16 @@
 import type { Metadata } from "next"
 import { cache } from "react"
 
-import type { LandingPageMetadata, LandingPageMetadataResponse } from "@/types/seo-metadata"
+import type {
+  LandingPageMetadata,
+  LandingPageMetadataResponse,
+} from "@/types/seo-metadata"
 
 const REVALIDATE_SEC = 3600
-const BRAND_NAME = "Slot"
-const BRAND_TITLE = "Slot — A Refined Gaming Experience"
+const BRAND_NAME = "Market Indo"
+const BRAND_TITLE = "Market Indo — Ruang Game Pilihan Indonesia"
 const BRAND_DESCRIPTION =
-  "Discover curated games, practical guides, and a refined experience built for every moment."
+  "Temukan game yang ramai di pasar Indonesia, panduan lokal, dan akses cepat dalam satu ruang yang segar."
 
 function apiBase(): string {
   const url = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "")
@@ -16,7 +19,10 @@ function apiBase(): string {
 }
 
 function parseRobots(robots: string): Metadata["robots"] {
-  const parts = robots.toLowerCase().split(",").map((p) => p.trim())
+  const parts = robots
+    .toLowerCase()
+    .split(",")
+    .map((p) => p.trim())
   return {
     index: !parts.includes("noindex"),
     follow: !parts.includes("nofollow"),
@@ -27,7 +33,9 @@ function ogLocaleToOpenGraph(locale: string): string {
   return locale.includes("-") ? locale : locale.replace("_", "-")
 }
 
-export function landingMetadataToNextMetadata(data: LandingPageMetadata): Metadata {
+export function landingMetadataToNextMetadata(
+  data: LandingPageMetadata
+): Metadata {
   return {
     title: { absolute: BRAND_TITLE },
     description: BRAND_DESCRIPTION,
@@ -67,12 +75,16 @@ async function fetchLandingPageContext(): Promise<{
   try {
     const res = await fetch(`${apiBase()}/metadata`, {
       next: { revalidate: REVALIDATE_SEC },
-      headers: { Accept: "application/json" },
+      headers: {
+        Accept: "application/json",
+        "X-API-Key": process.env.NEXT_PUBLIC_API_KEY ?? "",
+      },
     })
     if (!res.ok) return { metadata: null, redirectUrl: "" }
     const body = (await res.json()) as LandingPageMetadataResponse
     const metadata = body.metadata ?? null
-    const redirectUrl = body.redirectUrl?.trim() || metadata?.canonical_url?.trim() || ""
+    const redirectUrl =
+      body.redirectUrl?.trim() || body.redirect_url?.trim() || ""
     return { metadata, redirectUrl }
   } catch {
     return { metadata: null, redirectUrl: "" }
@@ -98,12 +110,16 @@ export async function getHomePageMetadata(): Promise<Metadata> {
   return landing ? landingMetadataToNextMetadata(landing) : defaultHomeMetadata
 }
 
-const siteUrl = () => process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
+const siteUrl = () =>
+  process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
 
-export function siteLanguageFromMetadata(landing: LandingPageMetadata | null): string {
-  if (!landing) return "en"
+export function siteLanguageFromMetadata(
+  landing: LandingPageMetadata | null
+): string {
+  if (!landing) return "id"
   const fromSchema = landing.schema_jsonld.inLanguage
-  if (typeof fromSchema === "string" && fromSchema.length >= 2) return fromSchema
+  if (typeof fromSchema === "string" && fromSchema.length >= 2)
+    return fromSchema
   const locale = landing.og_locale
   if (locale.includes("_")) return locale.split("_")[0]
   if (locale.includes("-")) return locale.split("-")[0]
