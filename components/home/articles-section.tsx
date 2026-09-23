@@ -1,7 +1,6 @@
 import Link from "next/link"
-import { ArrowUpRight, Newspaper } from "lucide-react"
+import { ArrowRight, ArrowUpRight, Clock } from "lucide-react"
 
-import { ArticleCard } from "@/components/article-card"
 import type { Article } from "@/types/article"
 
 type ArticlesSectionProps = {
@@ -10,50 +9,68 @@ type ArticlesSectionProps = {
 
 export function ArticlesSection({ articles }: ArticlesSectionProps) {
   return (
-    <section
-      id="articles"
-      className="relative overflow-hidden bg-foreground py-20 text-background sm:py-28"
-    >
-      <div className="market-pattern absolute inset-0 opacity-[0.035]" />
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="mb-12 flex flex-col gap-6 border-b border-background/20 pb-8 sm:flex-row sm:items-end sm:justify-between">
-          <div className="max-w-3xl">
-            <p className="mb-4 flex items-center gap-2 text-xs font-extrabold tracking-[0.24em] text-primary uppercase">
-              <Newspaper className="h-3.5 w-3.5" /> Catatan Market Indo
-            </p>
-            <h2 className="font-heading text-3xl leading-[1.02] font-semibold tracking-[-0.04em] text-balance sm:text-5xl">
-              Baca tren,
+    <section id="articles" className="bg-[#07130d] text-white">
+      <div className="mx-auto grid max-w-[100rem] border-x border-white/15 lg:grid-cols-[20rem_1fr]">
+        <header className="flex flex-col border-b border-white/15 p-6 lg:border-r lg:border-b-0 lg:p-8">
+          <p className="font-mono text-[10px] font-bold tracking-[0.22em] text-[#94e759] uppercase">
+            / Kabar terbaru
+          </p>
+          <div className="mt-14 lg:mt-auto">
+            <p className="font-editorial text-4xl leading-[1.05] tracking-[-0.04em] italic">
+              Baca.
               <br />
-              <span className="font-editorial font-normal text-primary italic">
-                kenali permainannya.
-              </span>
-            </h2>
+              Pahami.
+              <br />
+              Main.
+            </p>
+            <Link
+              href="/articles"
+              className="mt-8 inline-flex items-center gap-3 border-b border-[#94e759] pb-2 text-xs font-black tracking-wider text-[#94e759] uppercase"
+            >
+              Semua artikel <ArrowUpRight className="h-4 w-4" />
+            </Link>
           </div>
-          <Link
-            href="/articles"
-            className="group inline-flex items-center gap-3 self-start border-b border-background/40 pb-2 text-sm font-bold transition-colors hover:border-primary hover:text-primary sm:self-auto"
-          >
-            Semua artikel{" "}
-            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </Link>
-        </div>
+        </header>
 
-        {articles.length ? (
-          <div className="grid gap-4 lg:grid-cols-3">
-            {articles.map((article) => (
-              <ArticleCard
+        <div>
+          {articles.length ? (
+            articles.map((article, index) => (
+              <Link
                 key={article.id}
-                article={article}
-                variant="featured"
-              />
-            ))}
-          </div>
-        ) : (
-          <div className="border border-background/20 bg-background/5 p-8 text-sm text-background/65">
-            Artikel terbaru sedang disiapkan. Kunjungi pusat artikel untuk
-            pembaruan berikutnya.
-          </div>
-        )}
+                href={`/articles/${article.slug}`}
+                className="group grid border-b border-white/15 p-6 transition-colors last:border-b-0 hover:bg-[#94e759] hover:text-[#07130d] sm:p-8 md:grid-cols-[3rem_1fr_auto] md:items-center md:gap-6 lg:p-10"
+              >
+                <span className="font-mono text-[10px] text-[#94e759] group-hover:text-[#07130d]">
+                  {(index + 1).toString().padStart(2, "0")}
+                </span>
+                <div className="mt-6 md:mt-0">
+                  <div className="flex flex-wrap items-center gap-3 font-mono text-[10px] tracking-wider text-white/45 uppercase group-hover:text-[#25462f]">
+                    <span>{article.cluster?.topicName ?? "Wawasan"}</span>
+                    <span className="flex items-center gap-1.5">
+                      <Clock className="h-3 w-3" /> {article.readingTime} menit
+                    </span>
+                  </div>
+                  <h3 className="mt-3 max-w-4xl text-xl leading-snug font-semibold tracking-[-0.025em] sm:text-2xl lg:text-3xl">
+                    {article.title}
+                  </h3>
+                  {article.excerpt ? (
+                    <p className="mt-3 line-clamp-1 max-w-3xl text-sm text-white/50 group-hover:text-[#365740]">
+                      {article.excerpt}
+                    </p>
+                  ) : null}
+                </div>
+                <span className="mt-6 flex h-12 w-12 items-center justify-center border border-white/25 transition-colors group-hover:border-[#07130d] md:mt-0">
+                  <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                </span>
+              </Link>
+            ))
+          ) : (
+            <div className="p-8 text-sm text-white/55 sm:p-12">
+              Artikel terbaru sedang disiapkan. Kunjungi kembali dalam beberapa
+              saat.
+            </div>
+          )}
+        </div>
       </div>
     </section>
   )

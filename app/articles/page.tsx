@@ -15,11 +15,11 @@ import { NavbarShell } from "@/components/layout/navbar-shell"
 import { getArticles } from "@/lib/api"
 
 export const metadata: Metadata = {
-  title: "Artikel | Market Indo",
+  title: "Artikel | Keluarga Cendana",
   description:
     "Baca artikel, panduan, dan kabar game pilihan untuk pasar Indonesia.",
   openGraph: {
-    title: "Artikel | Market Indo",
+    title: "Artikel | Keluarga Cendana",
     description:
       "Baca artikel, panduan, dan kabar game pilihan untuk pasar Indonesia.",
     type: "website",
@@ -59,14 +59,14 @@ export default async function ArticlesPage({ searchParams }: Props) {
               <BookOpen className="h-3.5 w-3.5" /> Pusat bacaan
             </p>
             <h1 className="max-w-4xl font-heading text-4xl leading-[1.02] font-semibold tracking-[-0.045em] text-balance sm:text-6xl">
-              Cerita game dari sudut{" "}
+              Cerita dari rumah{" "}
               <span className="font-editorial font-normal text-primary italic">
-                Indonesia.
+                Keluarga Cendana.
               </span>
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-7 text-muted-foreground">
-              Panduan, kabar, dan perspektif segar untuk memahami game yang
-              sedang tumbuh di pasar lokal.
+              Panduan, kabar, dan perspektif segar tentang permainan online yang
+              sedang tumbuh di sekitar kita.
             </p>
             {pagination ? (
               <p className="mt-8 font-mono text-xs tracking-[0.18em] text-muted-foreground uppercase">

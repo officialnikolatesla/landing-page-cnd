@@ -7,10 +7,10 @@ import type {
 } from "@/types/seo-metadata"
 
 const REVALIDATE_SEC = 3600
-const BRAND_NAME = "Market Indo"
-const BRAND_TITLE = "Market Indo — Ruang Game Pilihan Indonesia"
+const BRAND_NAME = "Keluarga Cendana"
+const BRAND_TITLE = "Keluarga Cendana — Rumah Permainan Online Indonesia"
 const BRAND_DESCRIPTION =
-  "Temukan game yang ramai di pasar Indonesia, panduan lokal, dan akses cepat dalam satu ruang yang segar."
+  "Temukan permainan online pilihan, kabar terbaru, dan keseruan yang tumbuh bersama di Keluarga Cendana."
 
 function apiBase(): string {
   const url = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "")

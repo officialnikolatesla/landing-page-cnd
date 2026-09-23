@@ -18,25 +18,25 @@ type Props = {
 export function ArticleCard({ article, variant = "default" }: Props) {
   if (variant === "featured") {
     return (
-      <article className="group flex min-h-72 flex-col rounded-2xl border border-border bg-card/75 p-6 transition-all hover:-translate-y-1 hover:border-primary/45">
+      <article className="group flex min-h-80 flex-col rounded-[1.75rem] border border-white/12 bg-white/6 p-6 text-white transition-all hover:-translate-y-1 hover:border-[#9cde63]/60 hover:bg-white/10">
         <div className="mb-12 flex items-center justify-between gap-4">
-          <span className="rounded-full bg-primary/10 px-2.5 py-1 text-[10px] font-bold tracking-[0.16em] text-primary uppercase">
+          <span className="rounded-full bg-[#9cde63]/15 px-2.5 py-1 text-[10px] font-bold tracking-[0.16em] text-[#a8e879] uppercase">
             {article.cluster?.topicName ?? "Wawasan"}
           </span>
-          <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
+          <span className="flex items-center gap-1.5 text-xs text-white/50">
             <Clock className="h-3.5 w-3.5" /> {article.readingTime} mnt
           </span>
         </div>
         <Link href={`/articles/${article.slug}`} className="mt-auto">
-          <h3 className="line-clamp-3 text-xl leading-snug font-bold tracking-tight transition-colors group-hover:text-primary">
+          <h3 className="line-clamp-3 text-xl leading-snug font-bold tracking-tight transition-colors group-hover:text-[#a8e879]">
             {article.title}
           </h3>
           {article.excerpt ? (
-            <p className="mt-3 line-clamp-2 text-sm leading-6 text-muted-foreground">
+            <p className="mt-3 line-clamp-2 text-sm leading-6 text-white/55">
               {article.excerpt}
             </p>
           ) : null}
-          <span className="mt-6 inline-flex items-center gap-2 text-xs font-bold tracking-[0.16em] text-primary uppercase">
+          <span className="mt-6 inline-flex items-center gap-2 text-xs font-bold tracking-[0.16em] text-[#a8e879] uppercase">
             Baca artikel{" "}
             <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
           </span>

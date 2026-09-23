@@ -8,23 +8,20 @@ const footerLinks = [
 
 export function Footer() {
   return (
-    <footer className="border-t-8 border-primary bg-[#241817] text-white">
-      <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6">
+    <footer className="border-t border-white/15 bg-[#07130d] text-white">
+      <div className="mx-auto max-w-[100rem] border-x border-white/15 px-5 py-14 sm:px-8">
         <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
           {/* Brand */}
           <div className="space-y-2">
             <Link
               href="/"
-              className="font-heading text-xl font-semibold tracking-tight text-white transition-opacity hover:opacity-80"
+              className="text-xl font-black tracking-tight text-white uppercase transition-opacity hover:opacity-80"
             >
-              Market{" "}
-              <span className="font-editorial font-normal text-red-400 italic">
-                Indo.
-              </span>
+              Keluarga <span className="text-[#94e759]">Cendana</span>
             </Link>
             <p className="max-w-xs text-sm leading-6 text-slate-400">
-              Kurasi game dan wawasan lokal untuk pemain Indonesia yang ingin
-              menjelajah dengan lebih praktis.
+              Rumah untuk permainan online, cerita baru, dan keseruan yang
+              tumbuh bersama pemain Indonesia.
             </p>
           </div>
 
@@ -44,7 +41,7 @@ export function Footer() {
 
         <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 sm:flex-row">
           <p className="text-xs text-slate-500">
-            © {new Date().getFullYear()} Market Indo. Hak cipta dilindungi.
+            © {new Date().getFullYear()} Keluarga Cendana. Hak cipta dilindungi.
           </p>
           <p className="text-xs text-slate-500">
             Bermainlah secara bertanggung jawab dan tetap pegang kendali.

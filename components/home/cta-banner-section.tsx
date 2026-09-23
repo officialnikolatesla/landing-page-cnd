@@ -1,30 +1,38 @@
 import Link from "next/link"
-import { ArrowRight } from "lucide-react"
+import { ArrowUpRight } from "lucide-react"
 
-export function CtaBannerSection() {
+type CtaBannerSectionProps = { redirectUrl: string }
+
+export function CtaBannerSection({ redirectUrl }: CtaBannerSectionProps) {
   return (
-    <section id="cta" className="py-24 border-t border-border">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="rounded-2xl border border-border bg-card p-8 sm:p-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
-          <div className="max-w-lg">
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground tracking-tight mb-3">
-              Ready to get started?
-            </h2>
-            <p className="text-muted-foreground leading-relaxed">
-              Explore the latest articles or use this template as the foundation
-              for your next project.
+    <section className="overflow-hidden bg-[#94e759] text-[#07130d]">
+      <div className="mx-auto max-w-[100rem] border-x border-[#07130d]/20 px-5 py-20 sm:px-8 sm:py-28 lg:px-12">
+        <div className="grid gap-12 lg:grid-cols-[1fr_18rem] lg:items-end">
+          <div>
+            <p className="font-mono text-[10px] font-black tracking-[0.25em] uppercase">
+              Jangan cuma menonton / ikut bermain
             </p>
+            <h2 className="mt-8 max-w-5xl text-[clamp(3.25rem,6.5vw,6.5rem)] leading-[0.88] font-semibold tracking-[-0.065em]">
+              Siap masuk
+              <br />
+              <span className="font-editorial font-normal italic">arena?</span>
+            </h2>
           </div>
-
-          <div className="flex flex-col sm:flex-row gap-3 shrink-0">
+          {redirectUrl ? (
             <Link
-              href="/articles"
-              className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-md bg-foreground text-background text-sm font-medium hover:opacity-90 transition-opacity"
+              href={redirectUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex aspect-square w-full max-w-72 flex-col justify-between rounded-full bg-[#07130d] p-8 text-white transition-transform hover:scale-[1.03] hover:rotate-3"
             >
-              Browse Articles
-              <ArrowRight className="h-4 w-4" />
+              <ArrowUpRight className="ml-auto h-8 w-8 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+              <span className="text-2xl leading-none font-black tracking-tight uppercase">
+                Main
+                <br />
+                sekarang
+              </span>
             </Link>
-          </div>
+          ) : null}
         </div>
       </div>
     </section>

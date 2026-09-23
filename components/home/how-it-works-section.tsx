@@ -1,115 +1,91 @@
-import Image from "next/image"
 import Link from "next/link"
-import { ArrowUpRight, Joystick, ScanSearch, ShieldCheck } from "lucide-react"
+import { ArrowUpRight, Asterisk, MoveRight } from "lucide-react"
 
-const steps = [
+const rows = [
   {
     number: "01",
-    icon: ScanSearch,
-    title: "Cari yang lagi ramai",
-    description:
-      "Jelajahi pilihan game dan artikel yang relevan untuk pemain Indonesia.",
+    title: "Temukan",
+    note: "Kurasi permainan online yang sedang ramai dan layak masuk daftar mainmu.",
   },
   {
     number: "02",
-    icon: Joystick,
-    title: "Pilih gaya bermain",
-    description:
-      "Dari sesi santai hingga tantangan cepat, temukan pengalaman yang pas.",
+    title: "Pelajari",
+    note: "Panduan ringkas dan kabar terbaru supaya kamu tidak tertinggal permainan.",
   },
   {
     number: "03",
-    icon: ShieldCheck,
-    title: "Main dengan kendali",
-    description:
-      "Buka tujuan resmi, pahami aturannya, dan tetap bermain secara bertanggung jawab.",
+    title: "Mainkan",
+    note: "Buka tujuan resmi, pegang kendali, dan nikmati setiap sesi dengan bijak.",
   },
 ]
 
 type HowItWorksSectionProps = { redirectUrl: string }
 
 export function HowItWorksSection({ redirectUrl }: HowItWorksSectionProps) {
-  const buttonHref = redirectUrl || "#"
-
   return (
     <section
       id="how-it-works"
-      className="overflow-hidden border-b border-border py-20 sm:py-28"
+      className="bg-[#f1f1e8] text-[#0b1d14] dark:bg-[#dfe5d6]"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="mb-12 grid gap-6 lg:grid-cols-[0.75fr_1.25fr] lg:items-end">
-          <p className="text-xs font-extrabold tracking-[0.24em] text-primary uppercase">
-            Cara menjelajah / 3 langkah
-          </p>
-          <h2 className="font-heading text-3xl leading-[1.02] font-semibold tracking-[-0.04em] text-balance sm:text-5xl">
-            Dari pasar lokal,
-            <br />
-            <span className="font-editorial font-normal text-primary italic">
-              untuk pemain lokal.
-            </span>
-          </h2>
+      <div className="mx-auto max-w-[100rem] border-x border-[#0b1d14]/20">
+        <header className="grid border-b border-[#0b1d14]/20 lg:grid-cols-[20rem_1fr]">
+          <div className="border-b border-[#0b1d14]/20 p-6 lg:border-r lg:border-b-0 lg:p-8">
+            <p className="font-mono text-[10px] font-bold tracking-[0.22em] uppercase">
+              / Cara bermain
+            </p>
+          </div>
+          <div className="p-6 sm:p-10 lg:p-14">
+            <h2 className="max-w-4xl text-[clamp(2.5rem,4.8vw,4.75rem)] leading-[0.98] font-semibold tracking-[-0.055em]">
+              Tiga langkah,
+              <br />
+              <span className="font-editorial font-normal text-[#4fa626] italic">
+                tanpa ribet.
+              </span>
+            </h2>
+          </div>
+        </header>
+
+        <div>
+          {rows.map(({ number, title, note }) => (
+            <article
+              key={number}
+              className="group grid border-b border-[#0b1d14]/20 transition-colors hover:bg-[#94e759] md:grid-cols-[6rem_1fr_minmax(16rem,28rem)_5rem] md:items-center"
+            >
+              <div className="border-b border-[#0b1d14]/20 p-5 font-mono text-xs md:border-r md:border-b-0 md:p-7">
+                {number}
+              </div>
+              <h3 className="px-5 pt-7 text-4xl font-semibold tracking-[-0.045em] sm:text-5xl md:px-8 md:py-8 lg:text-6xl">
+                {title}
+              </h3>
+              <p className="px-5 py-6 text-sm leading-6 text-[#365044] md:px-8">
+                {note}
+              </p>
+              <div className="hidden h-full items-center justify-center border-l border-[#0b1d14]/20 md:flex">
+                <MoveRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+              </div>
+            </article>
+          ))}
         </div>
 
-        <div className="grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">
-          <div className="relative min-h-[32rem] overflow-hidden border border-border bg-card">
-            <Image
-              src="/images/market-indo-game.png"
-              alt="Ilustrasi konsol game merah putih dengan nuansa Indonesia"
-              fill
-              sizes="(min-width: 1024px) 58vw, 100vw"
-              className="object-cover"
-            />
-            <div className="absolute inset-x-5 bottom-5 flex items-end justify-between gap-5 bg-[#fff8ec]/92 p-5 text-[#281815] shadow-xl backdrop-blur sm:inset-x-7 sm:bottom-7 sm:p-6">
-              <div>
-                <p className="text-[10px] font-extrabold tracking-[0.22em] text-[#c8252c] uppercase">
-                  Rasa Nusantara
-                </p>
-                <p className="mt-1 max-w-sm font-heading text-lg leading-tight font-semibold sm:text-xl">
-                  Visual lokal, pengalaman modern.
-                </p>
-              </div>
-              <span className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#c8252c] text-white sm:flex">
-                <Joystick className="h-5 w-5" />
-              </span>
-            </div>
+        <div className="grid lg:grid-cols-[1fr_auto]">
+          <div className="flex min-h-32 items-center gap-5 p-6 sm:p-10">
+            <Asterisk className="h-10 w-10 text-[#4fa626]" />
+            <p className="max-w-xl text-sm leading-6 text-[#365044]">
+              Keluarga Cendana menyatukan akses permainan dan informasi dalam
+              satu tempat yang mudah dijelajahi.
+            </p>
           </div>
-
-          <div className="grid border border-border bg-card">
-            {steps.map(({ number, icon: Icon, title, description }) => (
-              <div
-                key={number}
-                className="group grid grid-cols-[3rem_1fr] gap-4 border-b border-border p-6 last:border-b-0 sm:grid-cols-[4rem_1fr] sm:p-8"
-              >
-                <div>
-                  <span className="font-mono text-xs text-primary">
-                    /{number}
-                  </span>
-                  <Icon
-                    className="mt-5 h-6 w-6 text-muted-foreground transition-colors group-hover:text-primary"
-                    strokeWidth={1.6}
-                  />
-                </div>
-                <div>
-                  <h3 className="font-heading text-lg font-semibold tracking-tight sm:text-xl">
-                    {title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-6 text-muted-foreground">
-                    {description}
-                  </p>
-                </div>
-              </div>
-            ))}
+          {redirectUrl ? (
             <Link
-              href={buttonHref}
-              target={redirectUrl ? "_blank" : undefined}
-              rel={redirectUrl ? "noopener noreferrer" : undefined}
-              aria-disabled={!redirectUrl}
-              className="group flex items-center justify-between bg-foreground px-7 py-5 text-sm font-extrabold tracking-[0.1em] text-background uppercase transition-colors hover:bg-primary hover:text-primary-foreground"
+              href={redirectUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex min-h-32 items-center gap-12 border-t border-[#0b1d14]/20 bg-[#0b1d14] px-8 text-sm font-black tracking-[0.15em] text-white uppercase transition-colors hover:bg-[#4fa626] lg:border-t-0 lg:border-l"
             >
-              Mulai jelajah{" "}
+              Mulai bermain
               <ArrowUpRight className="h-5 w-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
             </Link>
-          </div>
+          ) : null}
         </div>
       </div>
     </section>

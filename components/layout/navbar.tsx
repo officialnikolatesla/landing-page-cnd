@@ -40,27 +40,21 @@ export function Navbar({ redirectUrl }: NavbarProps) {
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-200",
         scrolled
-          ? "border-b border-border bg-background/82 shadow-lg shadow-black/5 backdrop-blur-xl"
-          : "bg-transparent"
+          ? "border-b border-white/15 bg-[#07130d]/95 backdrop-blur-xl"
+          : "border-b border-white/15 bg-[#07130d]"
       )}
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
+      <div className="mx-auto flex h-16 max-w-[100rem] items-center justify-between border-x border-white/15 px-4 text-white sm:px-6">
         {/* Logo */}
         <Link
           href="/"
-          className="flex items-center gap-2.5 text-base font-semibold tracking-[-0.03em] text-foreground transition-opacity hover:opacity-80"
+          className="flex items-center gap-3 text-base font-semibold tracking-[-0.03em] transition-opacity hover:opacity-80"
         >
-          <span className="grid h-8 w-8 rotate-45 grid-cols-2 gap-0.5 border-2 border-primary p-1.5">
-            <span className="bg-primary" />
-            <span className="rounded-full bg-primary/45" />
-            <span className="rounded-full bg-primary/45" />
-            <span className="bg-primary" />
+          <span className="flex h-8 w-8 items-center justify-center border border-[#94e759] font-mono text-[10px] font-black text-[#94e759]">
+            KC
           </span>
-          <span>
-            Market{" "}
-            <span className="font-editorial font-normal text-primary italic">
-              Indo.
-            </span>
+          <span className="leading-none font-black tracking-[-0.04em] uppercase">
+            Keluarga <span className="text-[#94e759]">Cendana</span>
           </span>
         </Link>
 
@@ -75,8 +69,8 @@ export function Navbar({ redirectUrl }: NavbarProps) {
                 pathname === link.href ||
                   (link.href === "/articles" &&
                     pathname.startsWith("/articles"))
-                  ? "font-medium text-foreground"
-                  : "text-muted-foreground hover:text-foreground"
+                  ? "font-medium text-[#94e759]"
+                  : "text-white/55 hover:text-white"
               )}
             >
               {link.label}
@@ -90,7 +84,7 @@ export function Navbar({ redirectUrl }: NavbarProps) {
             onClick={() =>
               setTheme(resolvedTheme === "dark" ? "light" : "dark")
             }
-            className="rounded-md p-2 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+            className="p-2 text-white/55 transition-colors hover:text-[#94e759]"
             aria-label="Toggle theme"
           >
             <Sun className="hidden h-4 w-4 dark:block" />
@@ -102,16 +96,16 @@ export function Navbar({ redirectUrl }: NavbarProps) {
               href={redirectUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden h-9 items-center gap-1.5 rounded-full bg-primary px-4 text-sm font-bold text-primary-foreground transition-transform hover:-translate-y-0.5 md:inline-flex"
+              className="hidden h-9 items-center gap-1.5 bg-[#94e759] px-4 text-xs font-black tracking-wider text-[#07130d] uppercase transition-colors hover:bg-white md:inline-flex"
             >
-              Jelajah game
+              Main sekarang
               <ArrowUpRight className="h-3.5 w-3.5" />
             </Link>
           ) : null}
 
           <button
             onClick={() => setMobileOpen((o) => !o)}
-            className="rounded-md p-2 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground md:hidden"
+            className="p-2 text-white/60 transition-colors hover:text-white md:hidden"
             aria-label="Toggle menu"
           >
             {mobileOpen ? (
@@ -125,7 +119,7 @@ export function Navbar({ redirectUrl }: NavbarProps) {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="border-t border-border bg-background/95 backdrop-blur-md md:hidden">
+        <div className="border-t border-white/15 bg-[#07130d] text-white md:hidden">
           <nav className="flex flex-col gap-1 px-4 py-4">
             {navLinks.map((link) => (
               <Link
@@ -136,8 +130,8 @@ export function Navbar({ redirectUrl }: NavbarProps) {
                   pathname === link.href ||
                     (link.href === "/articles" &&
                       pathname.startsWith("/articles"))
-                    ? "bg-accent font-medium text-foreground"
-                    : "text-muted-foreground hover:bg-accent hover:text-foreground"
+                    ? "bg-[#94e759] font-medium text-[#07130d]"
+                    : "text-white/60 hover:bg-white/5 hover:text-white"
                 )}
               >
                 {link.label}
@@ -148,9 +142,9 @@ export function Navbar({ redirectUrl }: NavbarProps) {
                 href={redirectUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-2 flex h-10 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground"
+                className="mt-2 flex h-10 items-center justify-center bg-[#94e759] text-sm font-bold text-[#07130d]"
               >
-                Jelajah game
+                Main sekarang
               </Link>
             ) : null}
           </nav>
