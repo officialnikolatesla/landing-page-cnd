@@ -18,14 +18,14 @@ export default async function RootLayout({
     <html lang="id" suppressHydrationWarning className="font-sans antialiased">
       <body>
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-37V4RRVB9B"
+          src="https://www.googletagmanager.com/gtag/js?id=G-3WER0FG01C"
           strategy="afterInteractive"
         />
         <Script id="gtag-init" strategy="afterInteractive">{`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-37V4RRVB9B');
+            gtag('config', 'G-3WER0FG01C');
         `}</Script>
         <ThemeProvider>{children}</ThemeProvider>
       </body>
