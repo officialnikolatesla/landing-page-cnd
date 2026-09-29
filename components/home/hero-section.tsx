@@ -12,9 +12,23 @@ type HeroSectionProps = {
   keywords?: string[]
 }
 
+function sanitizeLandingText(text: string) {
+  return text
+    .replace(/\bjudi(?:\s+online)?\b/gi, "permainan online")
+    .replace(/\bslot(?:\s+online)?\b/gi, "permainan online")
+    .replace(
+      /(?:permainan online)(?:\s+permainan online)+/gi,
+      "permainan online"
+    )
+}
+
 function keywordTags(keywords: string[] | undefined) {
   const clean = Array.from(
-    new Set((keywords ?? []).map((keyword) => keyword.trim()).filter(Boolean))
+    new Set(
+      (keywords ?? [])
+        .map((keyword) => sanitizeLandingText(keyword).trim())
+        .filter(Boolean)
+    )
   ).slice(0, 3)
 
   return clean.length ? clean : ["Game Pilihan", "Komunitas", "Berita Baru"]
