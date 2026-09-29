@@ -23,10 +23,10 @@ export function CtaBannerSection({ redirectUrl }: CtaBannerSectionProps) {
               href={redirectUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex aspect-square w-full max-w-72 flex-col justify-between rounded-full bg-[#07130d] p-8 text-white transition-transform hover:scale-[1.03] hover:rotate-3"
+              className="group relative grid aspect-square w-full max-w-72 place-items-center overflow-hidden rounded-full bg-[#07130d] p-8 text-white transition-transform hover:scale-[1.03] hover:rotate-3"
             >
-              <ArrowUpRight className="ml-auto h-8 w-8 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-              <span className="text-2xl leading-none font-black tracking-tight uppercase">
+              <ArrowUpRight className="absolute top-8 right-8 h-8 w-8 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+              <span className="text-center text-2xl leading-none font-black tracking-tight uppercase">
                 Main
                 <br />
                 sekarang
