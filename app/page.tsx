@@ -24,9 +24,6 @@ export default async function HomePage() {
     getRedirectUrl(),
     getArticles(1, 3).catch(() => null),
   ])
-  const keywords = landingMeta?.target_keywords?.length
-    ? landingMeta.target_keywords
-    : landingMeta?.meta_keywords
 
   return (
     <>
@@ -35,7 +32,7 @@ export default async function HomePage() {
       ) : null}
       <NavbarShell />
       <main>
-        <HeroSection redirectUrl={redirectUrl} keywords={keywords} />
+        <HeroSection redirectUrl={redirectUrl} />
         <HowItWorksSection redirectUrl={redirectUrl} />
         <ArticlesSection articles={articleData?.items ?? []} />
         <CtaBannerSection redirectUrl={redirectUrl} />

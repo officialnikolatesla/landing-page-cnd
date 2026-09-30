@@ -9,34 +9,9 @@ import {
 
 type HeroSectionProps = {
   redirectUrl: string
-  keywords?: string[]
 }
 
-function sanitizeLandingText(text: string) {
-  return text
-    .replace(/\bjudi(?:\s+online)?\b/gi, "permainan online")
-    .replace(/\bslot(?:\s+online)?\b/gi, "permainan online")
-    .replace(
-      /(?:permainan online)(?:\s+permainan online)+/gi,
-      "permainan online"
-    )
-}
-
-function keywordTags(keywords: string[] | undefined) {
-  const clean = Array.from(
-    new Set(
-      (keywords ?? [])
-        .map((keyword) => sanitizeLandingText(keyword).trim())
-        .filter(Boolean)
-    )
-  ).slice(0, 3)
-
-  return clean.length ? clean : ["Game Pilihan", "Komunitas", "Berita Baru"]
-}
-
-export function HeroSection({ redirectUrl, keywords }: HeroSectionProps) {
-  const tags = keywordTags(keywords)
-
+export function HeroSection({ redirectUrl }: HeroSectionProps) {
   return (
     <section className="relative overflow-hidden bg-[#07130d] pt-16 text-[#f2f5e9]">
       <div className="arcade-grid absolute inset-0 opacity-30" />
@@ -91,12 +66,10 @@ export function HeroSection({ redirectUrl, keywords }: HeroSectionProps) {
 
             <div className="overflow-hidden border-t border-white/15 bg-[#94e759] py-3 text-[#07130d]">
               <div className="ticker-track flex w-max items-center gap-8 font-mono text-[11px] font-black tracking-[0.18em] whitespace-nowrap uppercase">
-                {[...tags, ...tags, ...tags, ...tags].map((tag, index) => (
-                  <span
-                    key={`${tag}-${index}`}
-                    className="flex items-center gap-8"
-                  >
-                    {tag} <Circle className="h-2.5 w-2.5 fill-current" />
+                {Array.from({ length: 12 }, (_, index) => (
+                  <span key={index} className="flex items-center gap-8">
+                    permainan online{" "}
+                    <Circle className="h-2.5 w-2.5 fill-current" />
                   </span>
                 ))}
               </div>
