@@ -11,6 +11,15 @@ type HeroSectionProps = {
   redirectUrl: string
 }
 
+const tickerPhrases = [
+  "permainan online",
+  "game daring",
+  "permainan digital",
+  "hiburan interaktif",
+  "arena bermain virtual",
+  "petualangan daring",
+]
+
 export function HeroSection({ redirectUrl }: HeroSectionProps) {
   return (
     <section className="relative overflow-hidden bg-[#07130d] pt-16 text-[#f2f5e9]">
@@ -66,9 +75,9 @@ export function HeroSection({ redirectUrl }: HeroSectionProps) {
 
             <div className="overflow-hidden border-t border-white/15 bg-[#94e759] py-3 text-[#07130d]">
               <div className="ticker-track flex w-max items-center gap-8 font-mono text-[11px] font-black tracking-[0.18em] whitespace-nowrap uppercase">
-                {Array.from({ length: 12 }, (_, index) => (
+                {[...tickerPhrases, ...tickerPhrases].map((phrase, index) => (
                   <span key={index} className="flex items-center gap-8">
-                    permainan online{" "}
+                    {phrase}{" "}
                     <Circle className="h-2.5 w-2.5 fill-current" />
                   </span>
                 ))}
